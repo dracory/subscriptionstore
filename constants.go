@@ -1,0 +1,48 @@
+package subscriptionstore
+
+const COLUMN_CANCEL_AT_PERIOD_END = "cancel_at_period_end"
+const COLUMN_CREATED_AT = "created_at"
+const COLUMN_CURRENCY = "currency"
+const COLUMN_DESCRIPTION = "description"
+const COLUMN_FEATURES = "features"
+const COLUMN_ID = "id"
+const COLUMN_INTERVAL = "interval"
+const COLUMN_MEMO = "memo"
+const COLUMN_METAS = "metas"
+const COLUMN_PERIOD_END = "period_end"
+const COLUMN_PERIOD_START = "period_start"
+const COLUMN_PAYMENT_METHOD_ID = "payment_method_id"
+const COLUMN_PLAN_ID = "plan_id"
+const COLUMN_PRICE = "price"
+const COLUMN_SOFT_DELETED_AT = "soft_deleted_at"
+const COLUMN_STATUS = "status"
+const COLUMN_STRIPE_PRICE_ID = "stripe_price_id"
+const COLUMN_SUBSCRIBER_ID = "subscriber_id"
+const COLUMN_TITLE = "title"
+const COLUMN_TYPE = "type"
+const COLUMN_UPDATED_AT = "updated_at"
+
+const CURRENCY_USD = "USD"
+const CURRENCY_EUR = "EUR"
+const CURRENCY_GBP = "GBP"
+
+const PLAN_STATUS_ACTIVE = "active"
+const PLAN_STATUS_INACTIVE = "inactive"
+
+const PLAN_TYPE_BRONZE = "bronze"
+const PLAN_TYPE_SILVER = "silver"
+const PLAN_TYPE_GOLD = "gold"
+const PLAN_TYPE_PLATINUM = "platinum"
+
+const PLAN_INTERVAL_DAILY = "daily"
+const PLAN_INTERVAL_WEEKLY = "weekly"
+const PLAN_INTERVAL_MONTHLY = "monthly"
+const PLAN_INTERVAL_QUARTERLY = "quarterly"
+const PLAN_INTERVAL_YEARLY = "yearly"
+
+const SUBSCRIPTION_STATUS_ACTIVE = "active"
+const SUBSCRIPTION_STATUS_INACTIVE = "inactive"
+const SUBSCRIPTION_STATUS_CANCELLED = "cancelled"
+
+const YES = "yes"
+const NO = "no"
