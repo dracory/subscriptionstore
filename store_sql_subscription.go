@@ -3,7 +3,7 @@ package subscriptionstore
 import (
 	"errors"
 
-	"github.com/gouniverse/sb"
+	"github.com/dracory/sb"
 )
 
 // sqlSubscriptionTableCreate returns a SQL string for creating the country table
