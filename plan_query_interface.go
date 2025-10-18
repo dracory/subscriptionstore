@@ -24,6 +24,14 @@ type PlanQueryInterface interface {
 	HasStatusIn() bool
 	SetStatusIn(statusIn []string) PlanQueryInterface
 
+	Interval() string
+	HasInterval() bool
+	SetInterval(interval string) PlanQueryInterface
+
+	IntervalIn() []string
+	HasIntervalIn() bool
+	SetIntervalIn(intervalIn []string) PlanQueryInterface
+
 	Type() string
 	HasType() bool
 	SetType(type_ string) PlanQueryInterface

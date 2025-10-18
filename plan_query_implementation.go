@@ -31,6 +31,12 @@ type planQueryImplementation struct {
 	statusIn    []string
 	hasStatusIn bool
 
+	interval    string
+	hasInterval bool
+
+	intervalIn    []string
+	hasIntervalIn bool
+
 	type_   string
 	hasType bool
 
@@ -106,6 +112,34 @@ func (o *planQueryImplementation) HasStatusIn() bool {
 func (o *planQueryImplementation) SetStatusIn(statusIn []string) PlanQueryInterface {
 	o.statusIn = statusIn
 	o.hasStatusIn = true
+	return o
+}
+
+func (o *planQueryImplementation) Interval() string {
+	return o.interval
+}
+
+func (o *planQueryImplementation) HasInterval() bool {
+	return o.hasInterval
+}
+
+func (o *planQueryImplementation) SetInterval(interval string) PlanQueryInterface {
+	o.interval = interval
+	o.hasInterval = true
+	return o
+}
+
+func (o *planQueryImplementation) IntervalIn() []string {
+	return o.intervalIn
+}
+
+func (o *planQueryImplementation) HasIntervalIn() bool {
+	return o.hasIntervalIn
+}
+
+func (o *planQueryImplementation) SetIntervalIn(intervalIn []string) PlanQueryInterface {
+	o.intervalIn = intervalIn
+	o.hasIntervalIn = true
 	return o
 }
 
@@ -225,6 +259,14 @@ func (o *planQueryImplementation) ToQuery(store StoreInterface) *goqu.SelectData
 
 	if o.HasStatusIn() {
 		q = q.Where(goqu.C(COLUMN_STATUS).In(o.StatusIn()))
+	}
+
+	if o.HasInterval() {
+		q = q.Where(goqu.C(COLUMN_INTERVAL).Eq(o.Interval()))
+	}
+
+	if o.HasIntervalIn() {
+		q = q.Where(goqu.C(COLUMN_INTERVAL).In(o.IntervalIn()))
 	}
 
 	if o.HasType() {
