@@ -6,7 +6,7 @@ import (
 	"errors"
 	"log/slog"
 
-	"github.com/dracory/base/database"
+	"github.com/dracory/database"
 )
 
 var _ StoreInterface = (*storeImplementation)(nil) // verify it extends the interface

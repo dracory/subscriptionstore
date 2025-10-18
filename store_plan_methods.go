@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/doug-martin/goqu/v9"
-	"github.com/dracory/base/database"
+	"github.com/dracory/database"
 	"github.com/dracory/sb"
 	"github.com/dromara/carbon/v2"
 	"github.com/samber/lo"
@@ -30,7 +30,7 @@ func (store *storeImplementation) PlanCount(ctx context.Context, query PlanQuery
 
 	store.logSql("count", sqlStr, sqlParams...)
 
-	mapped, err := database.SelectToMapString(store.toQuerableContext(ctx), sqlStr, sqlParams...)
+	mapped, err := database.SelectToMapString(database.Context(ctx, store.db), sqlStr, sqlParams...)
 
 	if err != nil {
 		return -1, err
