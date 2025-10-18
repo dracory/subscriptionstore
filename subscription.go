@@ -3,9 +3,9 @@ package subscriptionstore
 import (
 	"encoding/json"
 
+	"github.com/dracory/dataobject"
+	"github.com/dracory/uid"
 	"github.com/dromara/carbon/v2"
-	"github.com/gouniverse/dataobject"
-	"github.com/gouniverse/uid"
 )
 
 // SubscriptionInterface defines the methods for a Subscription entity

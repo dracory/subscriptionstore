@@ -19,6 +19,10 @@ github.com/doug-martin/goqu/v9 v9.19.0 h1:PD7t1X3tRcUiSdc5TEyOFKujZA5gs3VSA7wxSv
 github.com/doug-martin/goqu/v9 v9.19.0/go.mod h1:nf0Wc2/hV3gYK9LiyqIrzBEVGlI8qW3GuDCEobC4wBQ=
 github.com/dracory/base v0.17.0 h1:eXQ5ve3AIGgJ0C5QwPaUszdIu1esc44EPeHUzxvMCkA=
 github.com/dracory/base v0.17.0/go.mod h1:3YgStabFm3nLtKpaVL9IkVk34AXeEI84JpaoNY9J0f8=
+github.com/dracory/dataobject v1.6.0 h1:k9kVYthGqK3giZvG/HMF9wGjwY9sRLv8XJ543nsUTiE=
+github.com/dracory/dataobject v1.6.0/go.mod h1:eo0pRMmHAEpWKQo29F6TTs43Cpp7J5QRj9wiJ0eQrJ0=
+github.com/dracory/uid v1.8.0 h1:L2D8fNH0CcmJLD3TM8f9RZ9UCpHB1Bbi82n7PG4I+5M=
+github.com/dracory/uid v1.8.0/go.mod h1:ldOjQLmGsQO4/oRIp5dpgajX3Qf1FI4QMPD34lXSIMI=
 github.com/dromara/carbon/v2 v2.6.3 h1:suYXDpa4/xNUtg0cqMu3rp6sQW8ZAmX+F9qi9k+vogw=
 github.com/dromara/carbon/v2 v2.6.3/go.mod h1:Baj3A1uBBctJmpZWJd6/+WWnmIuY2pobR6IOpB6xigc=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
