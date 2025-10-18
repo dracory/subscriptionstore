@@ -15,8 +15,6 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/denisenkom/go-mssqldb v0.10.0/go.mod h1:xbL0rPBG9cCiLr28tMa8zpbdarY27NDyej4t/EjAShU=
 github.com/doug-martin/goqu/v9 v9.19.0 h1:PD7t1X3tRcUiSdc5TEyOFKujZA5gs3VSA7wxSvBx7qo=
 github.com/doug-martin/goqu/v9 v9.19.0/go.mod h1:nf0Wc2/hV3gYK9LiyqIrzBEVGlI8qW3GuDCEobC4wBQ=
-github.com/dracory/base v0.17.0 h1:eXQ5ve3AIGgJ0C5QwPaUszdIu1esc44EPeHUzxvMCkA=
-github.com/dracory/base v0.17.0/go.mod h1:3YgStabFm3nLtKpaVL9IkVk34AXeEI84JpaoNY9J0f8=
 github.com/dracory/database v0.3.0 h1:cy5xVMMWZvP6AKAf42UTFESui0kiio2KY0ZmAMu+18s=
 github.com/dracory/database v0.3.0/go.mod h1:Lxt/E19aVgjzo7tuBr7f2johlkh0OMGop3rLmMeqDL4=
 github.com/dracory/dataobject v1.6.0 h1:k9kVYthGqK3giZvG/HMF9wGjwY9sRLv8XJ543nsUTiE=
@@ -49,8 +47,6 @@ github.com/google/pprof v0.0.0-20250317173921-a4b03ec1a45e/go.mod h1:boTsfXsheKC
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/gouniverse/maputils v0.7.0 h1:qoJnY8tY5gkdyuIkwGHJYwH7It7LnCevxU+P+c4nU/Y=
-github.com/gouniverse/maputils v0.7.0/go.mod h1:s8HbjSvEqBl+R+bFCvFd+mY07bx7EQM5YhIjDgF26Q0=
 github.com/jackc/chunkreader v1.0.0 h1:4s39bBR8ByfqH+DKm8rQA3E1LHZWB9XWcrz8fqaZbe0=
 github.com/jackc/chunkreader v1.0.0/go.mod h1:RT6O25fNZIuasFJRyZ4R/Y2BbhasbmZXF9QQ7T3kePo=
 github.com/jackc/chunkreader/v2 v2.0.0/go.mod h1:odVSm741yZoC3dpHEUXIqA9tQRhFrgOHwnPIn9lDKlk=
