@@ -10,7 +10,9 @@ import (
 )
 
 func initDB(filepath string) *sql.DB {
-	os.Remove(filepath) // remove database
+	if err := os.Remove(filepath); err != nil && !errors.Is(err, os.ErrNotExist) { // remove database
+		panic(err)
+	}
 	dsn := filepath + "?parseTime=true&loc=UTC&_loc=UTC"
 	db, err := sql.Open("sqlite", dsn)
 

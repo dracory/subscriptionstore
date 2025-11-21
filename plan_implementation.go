@@ -2,6 +2,7 @@ package subscriptionstore
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/dracory/dataobject"
 	"github.com/dracory/uid"
@@ -24,10 +25,13 @@ func NewPlan() PlanInterface {
 	o.SetDescription("")
 	o.SetFeatures("")
 	o.SetMemo("")
-	o.SetMetas(map[string]string{})
 	o.SetSoftDeletedAt(carbon.MaxValue().ToDateTimeString())
 	o.SetCreatedAt(carbon.Now(carbon.UTC).ToDateTimeString())
 	o.SetUpdatedAt(carbon.Now(carbon.UTC).ToDateTimeString())
+
+	if _, err := o.SetMetas(map[string]string{}); err != nil {
+		log.Println(err.Error())
+	}
 
 	return o
 }

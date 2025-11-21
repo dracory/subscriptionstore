@@ -2,6 +2,7 @@ package subscriptionstore
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/dracory/dataobject"
 	"github.com/dracory/uid"
@@ -39,7 +40,9 @@ func NewSubscription() SubscriptionInterface {
 	o.SetPeriodStart(carbon.MaxValue().ToDateTimeString())
 	o.SetPeriodEnd(carbon.MaxValue().ToDateTimeString())
 	o.SetCancelAtPeriodEnd(false)
-	o.SetMetas(map[string]string{})
+	if _, err := o.SetMetas(map[string]string{}); err != nil {
+		log.Println(err.Error())
+	}
 	return o
 }
 
