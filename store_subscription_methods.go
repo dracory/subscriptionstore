@@ -8,7 +8,6 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/dracory/database"
-	"github.com/dracory/sb"
 	"github.com/dromara/carbon/v2"
 	"github.com/samber/lo"
 )
@@ -157,7 +156,7 @@ func (store *storeImplementation) SubscriptionExists(ctx context.Context, subscr
 func (store *storeImplementation) SubscriptionList(ctx context.Context, query SubscriptionQueryInterface) ([]SubscriptionInterface, error) {
 	q := query.ToQuery(store)
 
-	sqlStr, _, errSql := q.Select().ToSQL()
+	sqlStr, params, errSql := q.Select().ToSQL()
 
 	if errSql != nil {
 		return []SubscriptionInterface{}, nil
@@ -167,8 +166,7 @@ func (store *storeImplementation) SubscriptionList(ctx context.Context, query Su
 		log.Println(sqlStr)
 	}
 
-	db := sb.NewDatabase(store.db, store.dbDriverName)
-	modelMaps, err := db.SelectToMapString(sqlStr)
+	modelMaps, err := database.SelectToMapString(store.toQuerableContext(ctx), sqlStr, params...)
 	if err != nil {
 		return []SubscriptionInterface{}, err
 	}

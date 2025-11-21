@@ -8,7 +8,6 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/dracory/database"
-	"github.com/dracory/sb"
 	"github.com/dromara/carbon/v2"
 	"github.com/samber/lo"
 )
@@ -30,7 +29,7 @@ func (store *storeImplementation) PlanCount(ctx context.Context, query PlanQuery
 
 	store.logSql("count", sqlStr, sqlParams...)
 
-	mapped, err := database.SelectToMapString(database.Context(ctx, store.db), sqlStr, sqlParams...)
+	mapped, err := database.SelectToMapString(store.toQuerableContext(ctx), sqlStr, sqlParams...)
 
 	if err != nil {
 		return -1, err
@@ -151,7 +150,7 @@ func (store *storeImplementation) PlanFindByID(ctx context.Context, id string) (
 }
 
 func (store *storeImplementation) PlanList(ctx context.Context, query PlanQueryInterface) ([]PlanInterface, error) {
-	sqlStr, _, errSql := query.ToQuery(store).Select().ToSQL()
+	sqlStr, sqlParams, errSql := query.ToQuery(store).Select().ToSQL()
 
 	if errSql != nil {
 		return []PlanInterface{}, nil
@@ -161,8 +160,7 @@ func (store *storeImplementation) PlanList(ctx context.Context, query PlanQueryI
 		log.Println(sqlStr)
 	}
 
-	db := sb.NewDatabase(store.db, store.dbDriverName)
-	modelMaps, err := db.SelectToMapString(sqlStr)
+	modelMaps, err := database.SelectToMapString(store.toQuerableContext(ctx), sqlStr, sqlParams...)
 	if err != nil {
 		return []PlanInterface{}, err
 	}

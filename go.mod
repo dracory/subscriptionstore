@@ -1,17 +1,17 @@
 module github.com/dracory/subscriptionstore
 
-go 1.24.0
+go 1.25
 
 require (
 	github.com/doug-martin/goqu/v9 v9.19.0
-	github.com/dracory/database v0.3.0
+	github.com/dracory/database v0.5.0
 	github.com/dracory/dataobject v1.6.0
-	github.com/dracory/sb v0.11.0
+	github.com/dracory/sb v0.15.0
 	github.com/dracory/uid v1.8.0
-	github.com/dromara/carbon/v2 v2.6.3
-	github.com/samber/lo v1.49.1
-	github.com/spf13/cast v1.9.2
-	modernc.org/sqlite v1.38.0
+	github.com/dromara/carbon/v2 v2.6.15
+	github.com/samber/lo v1.52.0
+	github.com/spf13/cast v1.10.0
+	modernc.org/sqlite v1.40.1
 )
 
 require (
@@ -19,14 +19,12 @@ require (
 	github.com/georgysavva/scany v1.2.3 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-sqlite3 v1.14.27 // indirect
-	github.com/ncruces/go-strftime v0.1.9 // indirect
+	github.com/ncruces/go-strftime v1.0.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
-	golang.org/x/crypto v0.37.0 // indirect
-	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.24.0 // indirect
-	modernc.org/libc v1.65.10 // indirect
+	golang.org/x/exp v0.0.0-20251113190631-e25ba8c21ef6 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
+	modernc.org/libc v1.67.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 )
