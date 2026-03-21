@@ -16,7 +16,7 @@ func (st *storeImplementation) sqlSubscriptionTableCreate() (string, error) {
 		return "", errors.New("subscription store: subscription table name is empty")
 	}
 
-	sql := sb.NewBuilder(sb.DatabaseDriverName(st.db)).
+	sql, err := sb.NewBuilder(sb.DatabaseDriverName(st.db)).
 		Table(st.subscriptionTableName).
 		Column(sb.Column{
 			Name:       COLUMN_ID,
@@ -78,6 +78,10 @@ func (st *storeImplementation) sqlSubscriptionTableCreate() (string, error) {
 			Type: sb.COLUMN_TYPE_DATETIME,
 		}).
 		CreateIfNotExists()
+
+	if err != nil {
+		return "", err
+	}
 
 	return sql, nil
 }
