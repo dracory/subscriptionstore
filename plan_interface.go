@@ -7,7 +7,7 @@ import "github.com/dromara/carbon/v2"
 type PlanInterface interface {
 	Data() map[string]string
 	DataChanged() map[string]string
-	MarkAsNotDirty()
+	MarkAsNotDirty(columns ...string)
 
 	CreatedAt() string
 	SetCreatedAt(createdAt string) PlanInterface
