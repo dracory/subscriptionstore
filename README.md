@@ -15,13 +15,13 @@ A powerful, extensible Go module for managing subscription plans and subscriptio
 - **Custom Metadata (Metas):** Attach arbitrary key-value data to plans and subscriptions.
 - **Flexible Queries:** Use query interfaces to filter, paginate, and sort results.
 - **Real DB Testing:** Tests use in-memory SQLite for realistic, high-confidence tests.
-- **Multi-Database Support:** Powered by [Goqu](https://github.com/doug-martin/goqu), you can use SQLite, MySQL, PostgreSQL, and more—just change the driver and connection string.
+- **ORM Powered:** Built on [dracory/neat](https://github.com/dracory/neat) for clean database abstraction.
 
 ---
 
 ## Architecture Overview
 - **Entities:** `Plan` and `Subscription` are private types, always accessed via their public interfaces (`PlanInterface`, `SubscriptionInterface`).
-- **Stores:** Data access objects implement the `StoreInterface` and are responsible for all DB operations, using Goqu for SQL dialect independence.
+- **Stores:** Data access objects implement the `StoreInterface` and are responsible for all DB operations via neat ORM.
 - **Queries:** Query interfaces (`PlanQueryInterface`, `SubscriptionQueryInterface`) allow for composable, type-safe filtering.
 - **Extensibility:** Swap or extend any entity, store, or query logic by implementing the relevant interface.
 
@@ -29,22 +29,26 @@ A powerful, extensible Go module for managing subscription plans and subscriptio
 
 ## Quick Start Example
 
-### 1. Initialize the Store (SQLite Example, easily swappable)
+### 1. Initialize the Store (SQLite Example)
 ```go
 import (
     "context"
-    "github.com/dracory/subscriptionstore"
-    _ "modernc.org/sqlite" // Or use _ "github.com/go-sql-driver/mysql" for MySQL, etc.
     "database/sql"
+    "github.com/dracory/subscriptionstore"
+    _ "modernc.org/sqlite"
 )
 
-// For SQLite (in-memory):
 db, _ := sql.Open("sqlite", ":memory:")
-// For MySQL: db, _ := sql.Open("mysql", "user:pass@tcp(localhost:3306)/dbname")
-// For PostgreSQL: db, _ := sql.Open("postgres", "host=localhost user=... password=... dbname=... sslmode=disable")
 
-store := subscriptionstore.NewStore(db, "sqlite", "plans", "subscriptions")
-store.AutoMigrate(context.Background())
+store, err := subscriptionstore.NewStore(subscriptionstore.NewStoreOptions{
+    DB:                    db,
+    PlanTableName:         "plans",
+    SubscriptionTableName: "subscriptions",
+    AutomigrateEnabled:    true,
+})
+if err != nil {
+    panic(err)
+}
 ```
 
 ### 2. Create a New Plan
@@ -70,7 +74,7 @@ err := store.PlanCreate(context.Background(), plan)
 ```go
 subscription := subscriptionstore.NewSubscription().
     SetSubscriberID("user_123").
-    SetPlanID(plan.ID()).
+    SetPlanID(plan.GetID()).
     SetStatus("active").
     SetPaymentMethodID("pm_abc123")
 
