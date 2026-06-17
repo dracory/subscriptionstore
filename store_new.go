@@ -7,21 +7,19 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/dracory/sb"
+	"github.com/dracory/neat"
 )
 
-// NewStoreOptions define the options for creating a new block store
+// NewStoreOptions define the options for creating a new subscription store
 type NewStoreOptions struct {
 	PlanTableName         string
 	SubscriptionTableName string
 	DB                    *sql.DB
-	DbDriverName          string
 	AutomigrateEnabled    bool
 	DebugEnabled          bool
-	SqlLogger             *slog.Logger
 }
 
-// NewStore creates a new block store
+// NewStore creates a new subscription store
 func NewStore(opts NewStoreOptions) (StoreInterface, error) {
 	if opts.PlanTableName == "" {
 		return nil, errors.New("subscription store: PlanTableName is required")
@@ -35,28 +33,23 @@ func NewStore(opts NewStoreOptions) (StoreInterface, error) {
 		return nil, errors.New("subscription store: DB is required")
 	}
 
-	if opts.DbDriverName == "" {
-		opts.DbDriverName = sb.DatabaseDriverName(opts.DB)
+	neatDB, err := neat.NewFromSQLDB(opts.DB)
+	if err != nil {
+		return nil, err
 	}
 
-	if opts.SqlLogger == nil {
-		opts.SqlLogger = slog.New(slog.NewTextHandler(os.Stdout, nil))
-	}
-
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 	store := &storeImplementation{
 		planTableName:         opts.PlanTableName,
 		subscriptionTableName: opts.SubscriptionTableName,
+		db:                    neatDB,
 		automigrateEnabled:    opts.AutomigrateEnabled,
-		db:                    opts.DB,
-		dbDriverName:          opts.DbDriverName,
 		debugEnabled:          opts.DebugEnabled,
-		sqlLogger:             opts.SqlLogger,
+		sqlLogger:             logger,
 	}
 
 	if store.automigrateEnabled {
-		err := store.AutoMigrate(context.Background())
-
-		if err != nil {
+		if err := store.MigrateUp(context.Background()); err != nil {
 			return nil, err
 		}
 	}

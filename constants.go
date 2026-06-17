@@ -1,5 +1,7 @@
 package subscriptionstore
 
+const MAX_DATETIME = "9999-12-31 23:59:59"
+
 const COLUMN_CANCEL_AT_PERIOD_END = "cancel_at_period_end"
 const COLUMN_CREATED_AT = "created_at"
 const COLUMN_CURRENCY = "currency"
