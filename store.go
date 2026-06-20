@@ -630,7 +630,8 @@ func (st *storeImplementation) SubscriptionUpdate(ctx context.Context, subscript
 
 // buildPlanQuery builds a neat query from the plan query interface.
 func (st *storeImplementation) buildPlanQuery(query PlanQueryInterface) contractsorm.Query {
-	q := st.db.Query()
+	// Use Model() to enable neat's automatic soft delete handling via SoftDeletesMaxDate
+	q := st.db.Query().Model(&planImplementation{})
 
 	if query == nil {
 		return q
@@ -683,10 +684,9 @@ func (st *storeImplementation) buildPlanQuery(query PlanQueryInterface) contract
 		q = q.OrderBy(query.OrderBy(), sortOrder)
 	}
 
+	// Handle soft delete filtering via neat's automatic handling (SoftDeletesMaxDate)
 	if query.HasSoftDeletedIncluded() && query.SoftDeletedIncluded() {
 		q = q.WithSoftDeleted()
-	} else {
-		q = q.Where(COLUMN_SOFT_DELETED_AT+" = ?", carbon.Parse(MAX_DATETIME, carbon.UTC).StdTime())
 	}
 
 	return q
@@ -694,7 +694,8 @@ func (st *storeImplementation) buildPlanQuery(query PlanQueryInterface) contract
 
 // buildSubscriptionQuery builds a neat query from the subscription query interface.
 func (st *storeImplementation) buildSubscriptionQuery(query SubscriptionQueryInterface) contractsorm.Query {
-	q := st.db.Query()
+	// Use Model() to enable neat's automatic soft delete handling via SoftDeletesMaxDate
+	q := st.db.Query().Model(&subscriptionImplementation{})
 
 	if query == nil {
 		return q
@@ -740,10 +741,9 @@ func (st *storeImplementation) buildSubscriptionQuery(query SubscriptionQueryInt
 		q = q.OrderBy(query.OrderBy(), sortOrder)
 	}
 
+	// Handle soft delete filtering via neat's automatic handling (SoftDeletesMaxDate)
 	if query.HasSoftDeletedIncluded() && query.SoftDeletedIncluded() {
 		q = q.WithSoftDeleted()
-	} else {
-		q = q.Where(COLUMN_SOFT_DELETED_AT+" = ?", carbon.Parse(MAX_DATETIME, carbon.UTC).StdTime())
 	}
 
 	return q
