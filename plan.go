@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"log"
 
+	"uuid"
+
 	"github.com/dracory/neat/database/orm"
 	"github.com/dracory/neat/database/soft_delete"
-	neatuid "github.com/dracory/neat/support/uid"
 	"github.com/dromara/carbon/v2"
 	"github.com/spf13/cast"
 )
@@ -74,7 +75,7 @@ var _ PlanInterface = (*planImplementation)(nil)
 // == TYPE =====================================================================
 
 type planImplementation struct {
-	orm.ShortID
+	orm.StringID
 
 	TypeField          string `db:"type"`
 	StatusField        string `db:"status"`
@@ -97,7 +98,7 @@ type planImplementation struct {
 
 func NewPlan() PlanInterface {
 	o := &planImplementation{}
-	o.SetID(neatuid.GenerateShortID())
+	o.SetID(uuid.NewV7().String())
 	o.SetStatus(PLAN_STATUS_INACTIVE)
 	o.SetStripePriceID("")
 	o.SetDescription("")
@@ -148,11 +149,11 @@ func (o *planImplementation) IsSoftDeleted() bool {
 // == SETTERS AND GETTERS ======================================================
 
 func (o *planImplementation) GetID() string {
-	return o.ShortID.ID
+	return o.StringID.ID
 }
 
 func (o *planImplementation) SetID(id string) PlanInterface {
-	o.ShortID.ID = id
+	o.StringID.ID = id
 	return o
 }
 

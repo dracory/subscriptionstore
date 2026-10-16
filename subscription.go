@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"log"
 
+	"uuid"
+
 	"github.com/dracory/neat/database/orm"
 	"github.com/dracory/neat/database/soft_delete"
-	neatuid "github.com/dracory/neat/support/uid"
 	"github.com/dromara/carbon/v2"
 )
 
@@ -68,7 +69,7 @@ var _ SubscriptionInterface = (*subscriptionImplementation)(nil)
 // == TYPE =====================================================================
 
 type subscriptionImplementation struct {
-	orm.ShortID
+	orm.StringID
 
 	StatusField            string `db:"status"`
 	SubscriberIDField      string `db:"subscriber_id"`
@@ -89,7 +90,7 @@ type subscriptionImplementation struct {
 
 func NewSubscription() SubscriptionInterface {
 	o := &subscriptionImplementation{}
-	o.SetID(neatuid.GenerateShortID())
+	o.SetID(uuid.NewV7().String())
 	o.SetMemo("")
 	o.SetSoftDeletedAt(MAX_DATETIME)
 	o.SetCreatedAt(carbon.Now(carbon.UTC).ToDateTimeString(carbon.UTC))
@@ -140,11 +141,11 @@ func (o *subscriptionImplementation) IsSoftDeleted() bool {
 // == SETTERS AND GETTERS ======================================================
 
 func (o *subscriptionImplementation) GetID() string {
-	return o.ShortID.ID
+	return o.StringID.ID
 }
 
 func (o *subscriptionImplementation) SetID(id string) SubscriptionInterface {
-	o.ShortID.ID = id
+	o.StringID.ID = id
 	return o
 }
 
